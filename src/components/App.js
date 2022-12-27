@@ -21,15 +21,17 @@ const App = (props) => {
     <Router>
       <Fragment>
         <LoadingBar />
-          <Nav />
-          {loading === true
-            ? null
-            : <Routes>
-                <Route path='/' exact='/' element={<Dashboard />} />
-                <Route path='/leaderboard' exact='/' element={<Leaderboard />} />
-                <Route path='/login' exact='/login' element={<LoginBox />} />
-                <Route path='/add' exact='/add' element={<QuestionAdd />} />
-              </Routes>}
+        <Nav />
+        {loading === true
+          ? null
+          : <Routes>
+              <Route path='/' element={<Dashboard />}>
+                <Route path='/:tab' element={<Dashboard />} />
+              </Route>
+              <Route path='/leaderboard' exact='/' element={<Leaderboard />} />
+              <Route path='/login' exact='/login' element={<LoginBox />} />
+              <Route path='/add' exact='/add' element={<QuestionAdd />} />
+            </Routes>}
       </Fragment>
     </Router>
   )

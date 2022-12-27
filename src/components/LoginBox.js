@@ -1,13 +1,13 @@
 import React from "react"
-import Logo from "../logo-react-redux.png"
 import SelectUser from "./SelectUser"
 import { useSelector } from "react-redux"
 
 const LoginBox = () => {
 
-  const users = useSelector(({ users }) => (
-    Object.values(users)
-  ))
+  const users = useSelector(({ users }) => {
+    console.log("users", Object.values(users))
+    return Object.values(users)
+  })
 
   return (
     <div className="flex min-h-full flex-col justify-center sm:px-12 lg:p-8">
@@ -22,13 +22,8 @@ const LoginBox = () => {
             </p>
           </div>
           <div className="">
-            <img
-              className="my-8 mx-auto h-48 w-auto"
-              src={Logo}
-              alt="React Redux Logo"
-            />
             <div className="flex justify-center">
-              <h3 className="text-2xl font-bold text-emerald-500">Sign In</h3>
+              <h3 className="mt-4 text-2xl font-bold text-emerald-500">Sign In</h3>
             </div>
           </div>
           <div className="py-4 px-2">

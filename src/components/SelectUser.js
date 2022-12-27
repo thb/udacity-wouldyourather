@@ -16,16 +16,6 @@ import { useState } from 'react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import { Combobox } from '@headlessui/react'
 
-const people = [
-  {
-    id: 1,
-    name: 'Leslie Alexander',
-    avatarUrl:
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-  },
-  // More users...
-]
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
@@ -70,7 +60,7 @@ const SelectUser = (props) => {
                 {({ active, selected }) => (
                   <>
                     <div className="flex items-center">
-                      <img src={person.avatarUrl} alt="" className="h-6 w-6 flex-shrink-0 rounded-full" />
+                      <img src={person.avatarURL} alt="" className="h-6 w-6 flex-shrink-0 rounded-full" />
                       <span className={classNames('ml-3 truncate', selected && 'font-semibold')}>{person.name}</span>
                     </div>
 
