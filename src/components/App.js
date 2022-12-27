@@ -8,6 +8,7 @@ import Nav from './Nav'
 import Dashboard from './Dashboard'
 import Leaderboard from './Leaderboard'
 import QuestionAdd from './QuestionAdd'
+import Question from './Question'
 
 const App = (props) => {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ const App = (props) => {
               <Route path='/' element={<Dashboard />}>
                 <Route path='/:tab' element={<Dashboard />} />
               </Route>
+              <Route path='/question/:id' element={<Question />} />
               <Route path='/leaderboard' exact='/' element={<Leaderboard />} />
               <Route path='/login' exact='/login' element={<LoginBox />} />
               <Route path='/add' exact='/add' element={<QuestionAdd />} />

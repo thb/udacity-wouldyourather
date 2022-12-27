@@ -37,9 +37,14 @@ export default function Nav() {
           </div>
           <div className="ml-10 space-x-4 hidden md:block">
             { authedUser &&
-              <span className="text-base font-medium text-emerald-500 hover:text-emerald-500">
-                Hello, {authedUser}
-              </span>
+              <div>
+                <span className="text-base font-medium text-emerald-500 hover:text-emerald-500">
+                  Hello, {authedUser}
+                </span>
+                <NavLink to="/logout" className="inline-block rounded-md border border-transparent bg-emerald-500 py-2 px-4 text-base font-medium text-white hover:bg-opacity-75">
+                  Log out
+                </NavLink>
+              </div>
             }
             { !authedUser &&
               <NavLink to="/login" className="inline-block rounded-md border border-transparent bg-emerald-500 py-2 px-4 text-base font-medium text-white hover:bg-opacity-75">
