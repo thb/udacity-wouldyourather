@@ -1,13 +1,29 @@
-import React from "react"
+import React, { useState } from "react"
 import SelectUser from "./SelectUser"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
+import { setAuthedUser } from "../actions/authedUser"
+import { useNavigate } from "react-router-dom"
 
 const LoginBox = () => {
 
-  const users = useSelector(({ users }) => {
-    console.log("users", Object.values(users))
-    return Object.values(users)
-  })
+  const users = useSelector(({ users }) => Object.values(users))
+  const [selectedUser, setSelectedUser] = useState("")
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const handleSelectUser = (user) => {
+    setSelectedUser(user)
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (selectedUser === "") {
+      alert("Please select a user")
+      return
+    }
+    dispatch(setAuthedUser(selectedUser.id))
+    navigate('/')
+  }
 
   return (
     <div className="flex min-h-full flex-col justify-center sm:px-12 lg:p-8">
@@ -27,10 +43,10 @@ const LoginBox = () => {
             </div>
           </div>
           <div className="py-4 px-2">
-            <form className="space-y-6" action="#" method="POST">
+            <form className="space-y-6" action="#" method="POST" onSubmit={handleSubmit}>
               <div>
                 <div className="mt-1">
-                  <SelectUser people={users} />
+                  <SelectUser people={users} selectedUser={selectedUser} onSelectUser={handleSelectUser} />
                 </div>
               </div>
               <div>

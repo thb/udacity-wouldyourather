@@ -7,20 +7,18 @@ const QuestionAsk = (props) => {
 
   const question = useSelector((state) => state.questions[props.id])
   const authedUser = useSelector((state) => state.authedUser)
-  const users  = useSelector((state) => state.users)
 
   const [answer, setAnswer] = useState("")
 
   const optionValues = ['optionOne', 'optionTwo']
 
   const handleChange = (e) => {
-    console.log("Change", e.target.value)
+    e.preventDefault()
     setAnswer(e.target.value)
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    
     dispatch(handleSaveQuestionAnswer({authedUser, qid: question.id, answer}))
   }
 

@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from "react"
+import React from "react"
 import { useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
+import { Navigate, useParams } from "react-router-dom"
 import { Link } from "react-router-dom"
 
 const tabs = [
@@ -16,16 +16,20 @@ const Dashboard = () => {
   const users = useSelector((state) => state.users)
   const authedUser = useSelector((state) => state.authedUser)
 
-  const answeredQuestions = Object.values(questions).filter((question) => {
-    return Object.keys(users[authedUser].answers).includes(question.id)
-  }).sort((a, b) => b.timestamp - a.timestamp)
+  const answeredQuestions = authedUser && Object.values(questions)
+                                            .filter((question) => Object.keys(users[authedUser].answers).includes(question.id))
+                                            .sort((a, b) => b.timestamp - a.timestamp)
 
-  const unansweredQuestions = Object.values(questions).filter((question) => {
-    return !Object.keys(users[authedUser].answers).includes(question.id)
-  }).sort((a, b) => b.timestamp - a.timestamp)
+  const unansweredQuestions = authedUser && Object.values(questions)
+                                            .filter((question) => !Object.keys(users[authedUser].answers).includes(question.id))
+                                            .sort((a, b) => b.timestamp - a.timestamp)
 
   tab = tab || "unanswered"
   const activeQuestions = tab == "answered" ? answeredQuestions : unansweredQuestions
+
+  if (authedUser === null) {
+    return <Navigate to='/login' />
+  }
 
   return (
     <div className="mx-auto sm:w-full md:w-2/3 my-4 border-4 border-gray-200 rounded-lg">

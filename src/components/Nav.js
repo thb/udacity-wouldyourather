@@ -1,7 +1,8 @@
 import React from "react"
-import { useSelector } from "react-redux"
-import { NavLink } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux"
+import { NavLink, useNavigate } from "react-router-dom"
 import Logo from "../logo-react-redux.png"
+import { setAuthedUser } from "../actions/authedUser"
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -11,7 +12,17 @@ const navigation = [
 
 export default function Nav() {
 
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
   const authedUser = useSelector(({ authedUser }) => authedUser)
+  const currentUser = useSelector(({ users }) => users[authedUser])
+
+  const handleLogout = (e) => {
+    e.preventDefault()
+    dispatch(setAuthedUser(null))
+    navigate('/login')
+  }
 
   return (
     <header className="">
@@ -37,11 +48,12 @@ export default function Nav() {
           </div>
           <div className="ml-10 space-x-4 hidden md:block">
             { authedUser &&
-              <div>
-                <span className="text-base font-medium text-emerald-500 hover:text-emerald-500">
-                  Hello, {authedUser}
+              <div className="flex items-center">
+                <span className="text-base font-medium text-emerald-500 hover:text-emerald-500 mr-2">
+                  Hello, {currentUser.name}
                 </span>
-                <NavLink to="/logout" className="inline-block rounded-md border border-transparent bg-emerald-500 py-2 px-4 text-base font-medium text-white hover:bg-opacity-75">
+                <img className="h-8 w-auto rounded-full bg-gray-600 mr-2" src={currentUser.avatarURL} alt="" />
+                <NavLink to="#" onClick={handleLogout} className="inline-block rounded-md border border-transparent bg-emerald-500 py-2 px-4 text-base font-medium text-white hover:bg-opacity-75">
                   Log out
                 </NavLink>
               </div>

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { handleInitialData } from '../actions/shared'
@@ -18,22 +18,27 @@ const App = (props) => {
     dispatch(handleInitialData())
   })
 
+  const authedUser = useSelector((state) => state.authedUser)
+
+  const protectedRoutes =
+    <Routes>
+      <Route path='/' element={<Dashboard />}>
+        <Route path='/:tab' element={<Dashboard />} />
+      </Route>
+      <Route path='/question/:id' element={<Question />} />
+      <Route path='/leaderboard' exact='/' element={<Leaderboard />} />
+      <Route path='/login' exact='/login' element={<LoginBox />} />
+      <Route path='/add' exact='/add' element={<QuestionAdd />} />
+    </Routes>
+
+  const loginBox = <Routes><Route path='/login' element={<LoginBox />} /></Routes>
+
   return (
     <Router>
       <Fragment>
         <LoadingBar />
         <Nav />
-        {loading === true
-          ? null
-          : <Routes>
-              <Route path='/' element={<Dashboard />}>
-                <Route path='/:tab' element={<Dashboard />} />
-              </Route>
-              <Route path='/question/:id' element={<Question />} />
-              <Route path='/leaderboard' exact='/' element={<Leaderboard />} />
-              <Route path='/login' exact='/login' element={<LoginBox />} />
-              <Route path='/add' exact='/add' element={<QuestionAdd />} />
-            </Routes>}
+        { loading === true ? null : protectedRoutes }
       </Fragment>
     </Router>
   )

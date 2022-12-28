@@ -1,6 +1,6 @@
-import React, { Fragment, useEffect } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import QuestionPoll from './QuestionPoll'
 import QuestionAsk from './QuestionAsk'
 
@@ -10,10 +10,6 @@ const Question = () => {
   const question = useSelector((state) => state.questions[id])
   const users = useSelector((state) => state.users)
   const authedUser = useSelector((state) => state.authedUser)
-
-  useEffect(() => {
-    console.log('Question: ', question)
-  })
   
   const userAlreadyAnswered = Object.keys(users[authedUser].answers).includes(question.id)
 

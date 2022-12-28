@@ -25,6 +25,11 @@ const SelectUser = (props) => {
   const [query, setQuery] = useState('')
   const [selectedPerson, setSelectedPerson] = useState(null)
 
+  const handleSelectUser = (user) => {
+    setSelectedPerson(user)
+    props.onSelectUser(user)
+  }
+
   const filteredPeople =
     query === ''
       ? people
@@ -33,7 +38,7 @@ const SelectUser = (props) => {
         })
 
   return (
-    <Combobox as="div" value={selectedPerson} onChange={setSelectedPerson}>
+    <Combobox as="div" value={selectedPerson} onChange={handleSelectUser}>
       <div className="relative mt-1">
         <Combobox.Input
           className="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 sm:text-sm"
