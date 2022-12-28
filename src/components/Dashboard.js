@@ -14,13 +14,14 @@ const Dashboard = () => {
 
   const questions = useSelector((state) => state.questions)
   const users = useSelector((state) => state.users)
+  const authedUser = useSelector((state) => state.authedUser)
 
   const answeredQuestions = Object.values(questions).filter((question) => {
-    return Object.keys(users[question.author].answers).includes(question.id)
+    return Object.keys(users[authedUser].answers).includes(question.id)
   }).sort((a, b) => b.timestamp - a.timestamp)
 
   const unansweredQuestions = Object.values(questions).filter((question) => {
-    return !Object.keys(users[question.author].answers).includes(question.id)
+    return !Object.keys(users[authedUser].answers).includes(question.id)
   }).sort((a, b) => b.timestamp - a.timestamp)
 
   tab = tab || "unanswered"
