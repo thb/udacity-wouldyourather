@@ -35,9 +35,6 @@ export function handleSaveQuestion(info) {
 
     return saveQuestion(info)
       .then((question) => {
-        return question
-      })
-      .then((question) => {
         dispatch(addQuestion(question))
         return question
       })
