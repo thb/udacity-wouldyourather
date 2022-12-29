@@ -1,6 +1,6 @@
 import { saveQuestion, saveQuestionAnswer } from "../utils/api"
 import { showLoading, hideLoading } from 'react-redux-loading'
-import { updateUser } from './users'
+import { updateUserAnswers, updateUserQuestions } from './users'
 
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
 export const ADD_QUESTION = 'ADD_QUESTION'
@@ -30,12 +30,25 @@ function saveQuestionAnswerAction({ authedUser, qid, answer }) {
 }
 
 export function handleSaveQuestion(info) {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     dispatch(showLoading())
 
     return saveQuestion(info)
-      .then((question) => dispatch(addQuestion(question)))
+      .then((question) => {
+        return question
+      })
+      .then((question) => {
+        dispatch(addQuestion(question))
+        return question
+      })
+      .then((question) => {
+        dispatch(updateUserQuestions(question))
+      })
       .then(() => dispatch(hideLoading()))
+      .catch((e) => {
+        console.warn('Error in handleSaveQuestion: ', e)
+        alert('There was an error saving the question answer. Try again.', e)
+      })
   }
 }
 
@@ -44,7 +57,7 @@ export function handleSaveQuestionAnswer(info) {
     dispatch(showLoading())
 
     return saveQuestionAnswer(info)
-      .then(() => dispatch(updateUser(info)))
+      .then(() => dispatch(updateUserAnswers(info)))
       .then(() => dispatch(saveQuestionAnswerAction(info)))
       .then(() => dispatch(hideLoading()))
       .catch((e) => {
