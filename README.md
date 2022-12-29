@@ -2,6 +2,14 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+### Install
+
+`yarn install` (project create with node v18, via nvm)
+
+### Start
+
+`yarn start`
+
 ### Specs
 
 Login box (/login)
@@ -52,22 +60,3 @@ Other
 - if we navigated without being authed => redirection to login box
 - 404 - page or question that does not exist
 - Navigation Bar
-
-### State
-
-{
-  questions: { id, authorId, optionOne, optionTwo, answers: [answerId, ...] }
-  answers: { id, answerId, questionId, userId, answer, }
-  users: { id, name, answers: [answerId, ...], questions: [] }
-  authedUser: userId
-}
-
-### Components
-
-<LoginBox> /login
-<NewAnswer> /questions/:question_id
-<QuestionResults> 
-<NewQuestion> /add
-<UserStats> /leaderboard
-...
-<Nav>
