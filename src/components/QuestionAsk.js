@@ -19,6 +19,10 @@ const QuestionAsk = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    if (answer === "") {
+      alert("Please select an option")
+      return
+    }
     dispatch(handleSaveQuestionAnswer({authedUser, qid: question.id, answer}))
   }
 

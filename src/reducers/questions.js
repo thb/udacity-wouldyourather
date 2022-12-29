@@ -12,7 +12,10 @@ export default function questions(state = {}, action) {
         ...action.questions
       }
     case ADD_QUESTION :
-      return {}
+      return {
+        ...state,
+        [action.question.id]: action.question
+      }
     case SAVE_QUESTION_ANSWER :
       // ajouter un vote avec l'id du user à l'option sur la question
       // ajouter une réponse au user avec l'id de la question et l'options choisie

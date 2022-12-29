@@ -1,4 +1,4 @@
-import { saveQuestionAnswer } from "../utils/api"
+import { saveQuestion, saveQuestionAnswer } from "../utils/api"
 import { showLoading, hideLoading } from 'react-redux-loading'
 import { updateUser } from './users'
 
@@ -26,6 +26,16 @@ function saveQuestionAnswerAction({ authedUser, qid, answer }) {
     authedUser,
     qid,
     answer,
+  }
+}
+
+export function handleSaveQuestion(info) {
+  return (dispatch, getState) => {
+    dispatch(showLoading())
+
+    return saveQuestion(info)
+      .then((question) => dispatch(addQuestion(question)))
+      .then(() => dispatch(hideLoading()))
   }
 }
 

@@ -40,7 +40,7 @@ export default function Nav() {
                 to={link.href}
                 key={link.href  }
                 exact="/leaderboard"
-                className="text-base font-medium text-emerald-500 hover:text-emerald-500"
+                className={(isCurrent) => isCurrent ? "text-base font-medium text-emerald-500 hover:text-emerald-500" : "text-base font-medium text-gray-500 hover:text-gray-900"}
               >
                 {link.name}
               </NavLink>
