@@ -36,9 +36,6 @@ export function handleSaveQuestion(info) {
     return saveQuestion(info)
       .then((question) => {
         dispatch(addQuestion(question))
-        return question
-      })
-      .then((question) => {
         dispatch(updateUserQuestions(question))
       })
       .then(() => dispatch(hideLoading()))

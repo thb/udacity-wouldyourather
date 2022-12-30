@@ -32,7 +32,7 @@ const QuestionAdd = () => {
     dispatch(handleSaveQuestion({optionOneText: optionOne, optionTwoText: optionTwo, author: authedUser}))
     setOptionOne('')
     setOptionTwo('')
-    navigate('/')
+    navigate('/dashboard/unanswered')
   }
 
   if (authedUser === null) {
