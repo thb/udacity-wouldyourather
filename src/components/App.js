@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Routes, Route } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 import { handleInitialData } from '../actions/shared'
-import LoadingBar from 'react-redux-loading'
+import LoadingBar from 'react-redux-loading-bar'
 import LoginBox from './LoginBox'
 import Nav from './Nav'
 import Dashboard from './Dashboard'
@@ -21,14 +21,10 @@ const App = () => {
 
   useEffect(() => {
     dispatch(handleInitialData())
-    console.log('redirectUrl', redirectUrl)
-    console.log('location', location)
     if (location.pathname !== '/login') {
       setRedirectUrl(location.pathname)
     }
-    console.log('redirectUrl', redirectUrl)
-    console.log('authedUser', authedUser)
-  })
+  }, [dispatch, redirectUrl, location, authedUser])
 
   return (
     <Fragment>
