@@ -3,8 +3,9 @@ import SelectUser from "./SelectUser"
 import { useSelector, useDispatch } from "react-redux"
 import { setAuthedUser } from "../actions/authedUser"
 import { useNavigate } from "react-router-dom"
+import PropTypes from 'prop-types'
 
-const LoginBox = () => {
+const LoginBox = ({ redirectUrl }) => {
 
   const users = useSelector(({ users }) => Object.values(users))
   const [selectedUser, setSelectedUser] = useState("")
@@ -22,7 +23,7 @@ const LoginBox = () => {
       return
     }
     dispatch(setAuthedUser(selectedUser.id))
-    navigate('/')
+    navigate(redirectUrl)
   }
 
   return (
@@ -63,7 +64,10 @@ const LoginBox = () => {
       </div>
     </div>
   )
+}
 
+LoginBox.propTypes = {
+  redirectUrl: PropTypes.string.isRequired
 }
 
 export default LoginBox

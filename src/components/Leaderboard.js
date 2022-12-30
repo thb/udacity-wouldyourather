@@ -2,7 +2,7 @@ import React from "react"
 import { useSelector } from "react-redux"
 import { Navigate } from "react-router-dom"
 
-const Leaderboard = (props) => {
+const Leaderboard = () => {
   
   const authedUser = useSelector((state) => state.authedUser)
   const users = useSelector((state) => state.users)

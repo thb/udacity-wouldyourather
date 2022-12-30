@@ -38,11 +38,11 @@ const Dashboard = () => {
           <Link
             key={_tab.href}
             className={`${tab == _tab.href ? 'text-emerald-500 bg-gray-100' : 'text-black' } box-border block w-full py-4 font-bold text-base text-center first:border-r-2 last:border-l-2 border-b-4 border-gray-200`}
-            to={_tab.href}
+            to={`/dashboard/${_tab.href}`}
           >{_tab.name}</Link>
         ))}
       </div>
-      {activeQuestions.length > 0 && Object.values(activeQuestions).map((question) => (
+      {activeQuestions && Object.values(activeQuestions).map((question) => (
         <div key={question.id} className="box-border border-4 border-gray-200 m-4 rounded-lg">
           <div className=" bg-gray-100 p-2 border-b-4 border-gray-200 flex justify-between">
             <div className="font-bold text-base">{users[question.author].name} asks:</div>

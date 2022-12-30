@@ -4,7 +4,7 @@ import { useNavigate, Navigate } from "react-router-dom"
 import { useState } from "react"
 import { handleSaveQuestion } from "../actions/questions"
 
-const Dashboard = () => {
+const QuestionAdd = () => {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -85,4 +85,4 @@ const Dashboard = () => {
 
 }
 
-export default Dashboard
+export default QuestionAdd

@@ -1,11 +1,12 @@
 import React, { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { handleSaveQuestionAnswer } from "../actions/questions"
+import PropTypes from "prop-types"
 
-const QuestionAsk = (props) => {
+const QuestionAsk = ({ id }) => {
   const dispatch = useDispatch()
 
-  const question = useSelector((state) => state.questions[props.id])
+  const question = useSelector((state) => state.questions[id])
   const authedUser = useSelector((state) => state.authedUser)
 
   const [answer, setAnswer] = useState("")
@@ -43,6 +44,10 @@ const QuestionAsk = (props) => {
       </form>
     </div>
   )
+}
+
+QuestionAsk.propTypes = {
+  id: PropTypes.string.isRequired
 }
 
 export default QuestionAsk

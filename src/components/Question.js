@@ -1,8 +1,9 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useParams, Navigate } from 'react-router-dom'
 import QuestionPoll from './QuestionPoll'
 import QuestionAsk from './QuestionAsk'
+import NotFound from './NotFound'
 
 const Question = () => {
 
@@ -10,7 +11,15 @@ const Question = () => {
   const question = useSelector((state) => state.questions[id])
   const users = useSelector((state) => state.users)
   const authedUser = useSelector((state) => state.authedUser)
-  
+
+  if (authedUser === null) {
+    return <Navigate to='/login' />
+  }
+
+  if (question === undefined) {
+    return <NotFound />
+  }
+
   const userAlreadyAnswered = Object.keys(users[authedUser].answers).includes(question.id)
 
   return (

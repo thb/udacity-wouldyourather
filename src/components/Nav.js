@@ -1,11 +1,11 @@
 import React from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { NavLink, useNavigate } from "react-router-dom"
+import { Link, NavLink, useNavigate } from "react-router-dom"
 import Logo from "../logo-react-redux.png"
 import { setAuthedUser } from "../actions/authedUser"
 
 const navigation = [
-  { name: 'Home', href: '/' },
+  { name: 'Home', href: '/dashboard/unanswered' },
   { name: 'Leaderboard', href: '/leaderboard' },
   { name: 'Add question', href: '/add' },
 ]
@@ -29,10 +29,10 @@ export default function Nav() {
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 border-b-4 border-emerald-500" aria-label="Top">
         <div className="flex w-full items-center justify-between py-4">
           <div className="hidden md:block">
-            <a href="/">
+            <Link to={navigation[0].href}>
               <span className="sr-only">Your Company</span>
               <img className="h-14 w-auto" src={Logo} alt="" />
-            </a>
+            </Link>
           </div>
           <div className="ml-10 space-x-8">
             {navigation.map((link) => (
@@ -40,7 +40,9 @@ export default function Nav() {
                 to={link.href}
                 key={link.href  }
                 exact="/leaderboard"
-                className={(isCurrent) => isCurrent ? "text-base font-medium text-emerald-500 hover:text-emerald-500" : "text-base font-medium text-gray-500 hover:text-gray-900"}
+                className={({ isActive }) => isActive
+                  ? "text-base font-medium text-emerald-600 border-b-2 border-emerald-500"
+                  : "text-base font-medium text-emerald-500 hover:text-emerald-600" }
               >
                 {link.name}
               </NavLink>

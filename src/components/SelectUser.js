@@ -15,19 +15,19 @@
 import { useState } from 'react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import { Combobox } from '@headlessui/react'
+import PropTypes from 'prop-types'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-const SelectUser = (props) => {
-  const { people } = props
+const SelectUser = ({ people, onSelectUser }) => {
   const [query, setQuery] = useState('')
   const [selectedPerson, setSelectedPerson] = useState(null)
 
   const handleSelectUser = (user) => {
     setSelectedPerson(user)
-    props.onSelectUser(user)
+    onSelectUser(user)
   }
 
   const filteredPeople =
@@ -88,6 +88,17 @@ const SelectUser = (props) => {
       </div>
     </Combobox>
   )
+}
+
+SelectUser.propTypes = {
+  people: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      avatarURL: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  onSelectUser: PropTypes.func.isRequired,
 }
 
 export default SelectUser

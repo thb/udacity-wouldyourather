@@ -1,9 +1,10 @@
 import React from "react"
 import { useSelector } from "react-redux"
+import PropTypes from "prop-types"
 
-const QuestionPoll = (props) => {
+const QuestionPoll = ({ id }) => {
 
-  const question = useSelector((state) => state.questions[props.id])
+  const question = useSelector((state) => state.questions[id])
   const authedUser = useSelector((state) => state.authedUser)
 
   const percentage = (option) => (
@@ -39,6 +40,10 @@ const QuestionPoll = (props) => {
       ))}
     </div>
   )
+}
+
+QuestionPoll.propTypes = {
+  id: PropTypes.string.isRequired
 }
 
 export default QuestionPoll
